@@ -6,9 +6,9 @@ Although white and red wine may be an easy choice for most simply based on perso
 The data for white and red wine came in different csv files with the same variable names. To create a full datset containing both wine types for comparison, the data was joined by concatenaning along a new variable "Wine Type" that was created in both datasets. The data was then split into a training (80%), validation (10%), and test (10%) datasets that would be exported to csv files to maintain precision amongst platforms. 
 ### Initial EDA
 Intial exploratory data analysis was used to explore: 
-** Summary statistics for a variety of variables
-** Plotting white vs. red wine in regard to various physiochemical properties
-** Correlation matrices between all variables and identifying the types of relationships present
-** Plotting grouped box plots to visualize the summary statistics and potential outliers 
+*Summary statistics for a variety of variables
+*Plotting white vs. red wine in regard to various physiochemical properties
+*Correlation matrices between all variables and identifying the types of relationships present
+*Plotting grouped box plots to visualize the summary statistics and potential outliers 
 ### Prior to Modeling
 Before any modeling occurred, GVIF values were measured in R to determine if multicollinearity existed. The Density variable tended to have strong multicollinearity issues and is removed from the models. If doing so didn't fix the issues, then they were otherwise resolved in a different manor prior to modeling occurring. 
