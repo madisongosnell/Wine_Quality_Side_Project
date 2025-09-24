@@ -1,7 +1,7 @@
 # Performing EDA, Statistical Tests, and Multiple Linear Regression modeling on Wine Type Quality datsets
 Exploring wine quality from two datasets containing physiochemical properties of red and white wine samples from Northern Portugal.
 # Overview
-Although white and red wine may just be a drink choice for most, the two types differ in their physiochemical properties making them quite unique. Using datasets from UCI Machine Learning Repository, which contain physiochemical information and overall recorded quality of the wine samples, several key questions were identified: 
+Although white and red wine may just be a drink choice for most, the two types differ in their physiochemical properties making them each quite unique. Using datasets from UCI Machine Learning Repository, which contain physiochemical information and overall recorded quality of the wine samples, several key questions were identified: 
 * Can the overall quality of the wine be estimated based on its physiochemical properties?
 * Do white and red wine have statistically different physiochemical properties?
 
