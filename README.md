@@ -23,8 +23,8 @@ Analysis includes:
 * Initial investigation for identifying statistical differences between wine types with physiochemical properties of interest
 * Testing of assumptions for statistical tests, multiple linear regression models, multicollinearity, and more
 * Developing regularized regression models (Ridge and LASSO) for pH as well as for quality
-* Developing a Multiple Linear Regression Model (MLR) to estimate the pH of a wine based upon a variety of significant physiochemical properties
-* Developing a Multiple Linear Regression Model to estimate the quality of a wine based upon a variety of significant physiochemical properties
+* Developing a Multiple Linear Regression Model (MLR) to explore the relationship between the pH of a wine and a variety of significant physiochemical properties
+* Developing a Multiple Linear Regression Model to explore the relationship between the quality of a wine and a variety of significant physiochemical properties
 ### Identifying Statistical Differences
 To determine whether statistically significant differences existed between red and white wines in terms of physiochemical properties, the following steps were performed for multiple variables:
 1. Visualized data with grouped box plots
