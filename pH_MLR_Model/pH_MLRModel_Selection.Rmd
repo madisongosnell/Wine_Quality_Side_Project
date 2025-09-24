@@ -1,0 +1,121 @@
+---
+title: "Selection for pH MLR Model"
+output: html_document
+---
+
+```{r}
+#Reading in packages 
+library('tidyverse')
+library('car')
+library('DescTools')
+library('lmtest')
+library('gmodels')
+```
+
+
+```{r}
+#Reading in data
+train <- read.csv("~/Desktop/MSA Coding /Individual Project/wine_train.csv", sep=",")
+validation <- read.csv("~/Desktop/MSA Coding /Individual Project/wine_validation.csv", sep=",")
+test <- read.csv("~/Desktop/MSA Coding /Individual Project/wine_test.csv", sep=",")
+```
+
+
+Performing selection on the training data:
+```{r}
+#Checking GVIF values
+lm.model = lm(pH ~ ., data=train)
+vif(lm.model)
+#Will want to remove density (impacting GVIF of other variables)
+```
+
+
+```{r}
+#For Multiple Linear Regression Model for determining pH
+
+#Want to use model selection to determine what should go in the model
+full.model <- lm(pH ~ . , data = train)
+empty.model <- lm(pH ~ 1, data = train)
+
+#Forward Selection
+#k=2 for AIC selection
+for.model <- step(empty.model,
+                  scope = list(lower = empty.model,
+                               upper = full.model),
+                  direction = "forward", k = 2) 
+
+#Model given: pH ~ Wine.Type + fixed.acidity + residual.sugar + density + alcohol + chlorides + quality + sulphates + citric.acid + volatile.acidity + free.sulfur.dioxide + total.sulfur.dioxide
+```
+
+
+```{r}
+#Performing stepwise selection to see if we get a different model
+#k = 2 for AIC selection
+step.model <- step(empty.model,
+                  scope = list(lower = empty.model,
+                               upper = full.model),
+                  direction = "both", k = 2) 
+#Model given: pH ~ Wine.Type + fixed.acidity + residual.sugar + density + alcohol + chlorides + quality + sulphates + citric.acid + volatile.acidity + free.sulfur.dioxide + total.sulfur.dioxide
+```
+
+
+
+```{r}
+#Testing GVIF again for MLR pH with log transformation and after removing insignificant variables
+train$log_pH <- log(train$pH)
+
+lm.model = lm(log_pH ~ fixed.acidity + citric.acid + residual.sugar + chlorides + total.sulfur.dioxide + sulphates + alcohol + Wine.Type, data=train)
+
+vif(lm.model)
+
+#All GVIF values are under 5
+```
+
+Performing selection on the validation data:
+```{r}
+#Checking GVIF values
+lm.model = lm(pH ~ ., data=validation)
+vif(lm.model)
+#Will want to remove density (impacting GVIF of other variables)
+```
+
+```{r}
+#For Multiple Linear Regression Model for determining pH
+
+#Want to use model selection to determine what should go in the model
+full.model <- lm(pH ~ . , data = validation)
+empty.model <- lm(pH ~ 1, data = validation)
+
+#Forward Selection
+#k=2 for AIC selection
+for.model <- step(empty.model,
+                  scope = list(lower = empty.model,
+                               upper = full.model),
+                  direction = "forward", k = 2) 
+
+#Model given: pH ~ Wine.Type + fixed.acidity + sulphates + residual.sugar + density + alcohol + chlorides + quality + citric.acid + volatile.acidity
+#Slightly different model given than training
+```
+
+
+```{r}
+#Performing stepwise selection to see if we get a different model
+#k = 2 for AIC selection
+step.model <- step(empty.model,
+                  scope = list(lower = empty.model,
+                               upper = full.model),
+                  direction = "both", k = 2) 
+#Model given: pH ~ Wine.Type + fixed.acidity + sulphates + residual.sugar + density + alcohol + chlorides + quality + citric.acid + volatile.acidity
+#Slightly different model than training, but similar to final model decided on in Python
+```
+
+
+```{r}
+#Testing GVIF again for MLR pH with log transformation and after removing insignificant variables
+validation$log_pH <- log(validation$pH)
+
+lm.model = lm(log_pH ~ fixed.acidity + citric.acid + residual.sugar + chlorides + total.sulfur.dioxide + sulphates + alcohol + Wine.Type, data=validation)
+vif(lm.model)
+
+#All GVIF values are under 5
+```
