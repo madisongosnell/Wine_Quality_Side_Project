@@ -54,6 +54,26 @@ From the intial exploratory data analysis, the grouped box plots displayed that 
 Figure 1: Heatmap of Variable Correlation Matrix
 
 
+When performing the statistical tests, some of the results discovered were that there was: 
+* A difference in means of pH between red and white wines
+* A difference in location of total sulfur dioxide between red and white wines
+* Not a difference in medians of alcohol level between red and white wines
+
+To break down one of the results that led to the decisions above, we'll look at no difference in medians between red and white wines. First, you can see that the QQplot is not normal (potentially right skewed) and the Shapiro-Wilk tests have p-values of 0, less than alpha (0.05), which means the normality assumption is violated. 
+
+<img width="661" height="593" alt="Screenshot 2025-09-24 at 6 51 25 PM" src="https://github.com/user-attachments/assets/e580a150-4c60-4420-be42-f868ede17049" />
+
+Figure 2: QQplot and Shapiro-Wilk Test Results For White and Red Wine Alcohol Level
+
+Next, the histogram for each wines' alcohol levels were overlaid and a Levene test was run to determine if variances were statistically different (heteroscedastic). The figure below shows that the histograms are identical in shape, but not symmetric. This affects our interpretation of the differences between the wines, which is why our final decision is for the difference in medians between red and white wines. 
+
+<img width="656" height="576" alt="Screenshot 2025-09-24 at 6 56 44 PM" src="https://github.com/user-attachments/assets/e6827f7a-c95e-429b-b315-ca91d351df19" />
+
+Figure 3: Overlaid Histograms and Levene Test Results For White and Red Wine Alcohol Level
+
+Due to the normality assumption being violated, we perform the Kruskal-Wallis test between the two groups. The p-value was greater than the alpha (0.05) which indicates that there will not be a difference in median alcohol level between red and white wines. 
+
+
 As seen in the MAE model comparison, for both the pH and quality models, the ridge regression model had the smallest mean absolute error. The ridge regression models' aligned more with the actual dataset than the others presented. The reasoning behind such result could likely be due to the multicollinearity seen in the data. Although, the multiple linear regression models that removed conflicting variables causing multicollinearity concerns were a close second behind the ridge regression models in MAE performance.
 
 Table 1: pH MAE Comparisons
@@ -69,6 +89,7 @@ Table 2: Quality MAE Comparisons
 | Quality Multiple Linear Regression Model | 0.561 |
 | Quality Ridge Regression Model | 0.560 |
 | Quality Lasso Regression Model | 0.671 |
+
 
 Such models created can likely provide a relatively good estimation of pH or quality based on the variables included in the final model, but more data and variables could result in a higher performing model. Below are the final two models for pH and quality (would be exponentiated to get the interpretable value): 
 
