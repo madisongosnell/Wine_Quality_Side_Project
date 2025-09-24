@@ -73,4 +73,4 @@ These steps could all be beneficial to improving and building upon the models cr
 
 Link to dataset: https://archive.ics.uci.edu/dataset/186/wine+quality 
 
-Link to basic tableau dashboard for estimating wine quality by inputting custom values: https://public.tableau.com/views/Quality_MLR/Dashboard1?:language=en-US&:sid=&:redirect=auth&:display_count=n&:origin=viz_share_link
+Link to simple tableau dashboard for estimating wine quality by inputting custom values: https://public.tableau.com/shared/RRF2QQGJG?:display_count=n&:origin=viz_share_link
