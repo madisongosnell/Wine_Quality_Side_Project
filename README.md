@@ -72,3 +72,4 @@ The most logical next steps I see for improving the estimation of these variable
 These steps could all be beneficial to improving and building upon the models created and formed during this project. They will likely all contribute to improving model performance and reduce variance and multicollinearity within the data. 
 
 Link to dataset: https://archive.ics.uci.edu/dataset/186/wine+quality 
+Link to basic tableau dashboard for estimating wine quality by inputting custom values: https://public.tableau.com/views/Quality_MLR/Dashboard1?:language=en-US&:sid=&:redirect=auth&:display_count=n&:origin=viz_share_link
