@@ -1,0 +1,126 @@
+---
+title: "Quality_MLRModel_Selection"
+output: html_document
+---
+
+```{r}
+#Reading in packages 
+library('tidyverse')
+library('car')
+library('DescTools')
+library('lmtest')
+library('gmodels')
+```
+
+
+
+```{r}
+#Reading in data
+train <- read.csv("~/Desktop/MSA Coding /Individual Project/wine_train.csv", sep=",")
+validation <- read.csv("~/Desktop/MSA Coding /Individual Project/wine_validation.csv", sep=",")
+test <- read.csv("~/Desktop/MSA Coding /Individual Project/wine_test.csv", sep=",")
+```
+
+
+
+Performing selection on the training data:
+```{r}
+#Checking GVIF values
+lm.model = lm(quality ~ ., data=train)
+vif(lm.model)
+#Will want to remove density (impacting GVIF of other variables)
+```
+
+
+```{r}
+#For Multiple Linear Regression Model for determining quality
+
+#Want to use model selection to determine what should go in the model
+full.model <- lm(quality ~ . , data = train)
+empty.model <- lm(quality ~ 1, data = train)
+
+#Forward Selection
+#k=2 for AIC selection
+for.model <- step(empty.model,
+                  scope = list(lower = empty.model,
+                               upper = full.model),
+                  direction = "forward", k = 2) 
+
+#Model produced: quality ~ alcohol + volatile.acidity + sulphates + residual.sugar + Wine.Type + density + free.sulfur.dioxide + total.sulfur.dioxide + chlorides + fixed.acidity + pH
+```
+
+```{r}
+#Performing stepwise selection to see if we get a different model
+#k = 2 for AIC selection
+step.model <- step(empty.model,
+                  scope = list(lower = empty.model,
+                               upper = full.model),
+                  direction = "both", k = 2) 
+#Model produced: quality ~ alcohol + volatile.acidity + sulphates + residual.sugar + Wine.Type + density + free.sulfur.dioxide + total.sulfur.dioxide + chlorides + fixed.acidity + pH
+#Same model produced as forward selection
+```
+
+```{r}
+#Testing GVIF again for MLR quality with log transformation and after removing insignificant variables
+train$log.quality <- log(train$quality)
+
+lm.model = lm(log.quality ~ alcohol + volatile.acidity + sulphates + residual.sugar + Wine.Type + free.sulfur.dioxide + total.sulfur.dioxide + chlorides, data=train)
+
+vif(lm.model)
+
+#All GVIF values still under 5
+```
+
+
+Performing selection on the validation data:
+```{r}
+#Checking GVIF values
+lm.model = lm(quality ~ ., data=validation)
+vif(lm.model)
+#Will want to remove density (impacting GVIF of other variables)
+```
+
+
+
+```{r}
+#For Multiple Linear Regression Model for determining quality
+
+#Want to use model selection to determine what should go in the model
+full.model <- lm(quality ~ . , data = validation)
+empty.model <- lm(quality ~ 1, data = validation)
+
+#Forward Selection
+#k=2 for AIC selection
+for.model <- step(empty.model,
+                  scope = list(lower = empty.model,
+                               upper = full.model),
+                  direction = "forward", k = 2) 
+
+#Model produced: quality ~ alcohol + volatile.acidity + density + sulphates + citric.acid + residual.sugar
+#Slightly different model given than training
+```
+
+
+
+```{r}
+#Performing stepwise selection to see if we get a different model
+#k = 2 for AIC selection
+step.model <- step(empty.model,
+                  scope = list(lower = empty.model,
+                               upper = full.model),
+                  direction = "both", k = 2) 
+#Model given: quality ~ alcohol + volatile.acidity + sulphates + residual.sugar + Wine.Type
+#Slightly different model than training
+```
+
+
+```{r}
+#Testing GVIF again for MLR pH with log transformation and after removing insignificant variables
+validation$log.quality <- log(validation$quality)
+
+lm.model = lm(log.quality ~ fixed.acidity + citric.acid + residual.sugar + chlorides + total.sulfur.dioxide + sulphates + alcohol + Wine.Type, data=validation)
+vif(lm.model)
+
+#GVIF values still less than 5
+```
+
