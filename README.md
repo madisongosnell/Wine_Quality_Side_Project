@@ -20,7 +20,7 @@ Initial exploratory data analysis was conducted to examine:
 Before modeling, Generalized Variance Inflation Factor (GVIF) values were calculated in R to determine if multicollinearity existed. The Density variable tended to have strong multicollinearity issues and is removed from the models. If doing so didn't fix the issues, then they were otherwise resolved in a different manner prior to modeling occurring. 
 # Analysis
 Analysis includes: 
-* Initial investigation into identifying statistical differences between wine types with physiochemical properties of interest
+* Initial investigation for identifying statistical differences between wine types with physiochemical properties of interest
 * Testing of assumptions for statistical tests, multiple linear regression models, multicollinearity, and more
 * Developing regularized regression models (Ridge and LASSO) for pH as well as for quality
 * Developing a Multiple Linear Regression Model (MLR) to estimate the pH of a wine based upon a variety of significant physiochemical properties
