@@ -5,7 +5,8 @@ Although white and red wine may just be a drink choice for most, the two types d
 * Can the overall quality of the wine be estimated based on its physiochemical properties?
 * Do white and red wine have statistically different physiochemical properties?
 
-These questions, among others, formed the foundation of this analysis as the wine varieties began to be investigated.
+These questions, among others, formed the foundation of this analysis. From the analysis, we see that pH of a wine will be influenced by the wine type, alcohol level, fixed acidity, sulphates, residual sugar, citric acid, total sulfur dioxide, and chlorides. The quality of a wine will be influenced by the physiochemical properties of wine type, alcohol level, volatile acidity, sulphates, residual sugar, free sulfur dioxide, total sulfur dioxide, and chlorides. 
+
 # Data Collection and Preparation
 The data for white and red wine came in different csv files each containing identical variable names and no missing values. To allow for direct comparison, a new categorical variable, "Wine Type", was created. This variable was used to concatenate the two datasets and form a new "all_wine" csv file for analysis. 
 
@@ -18,7 +19,7 @@ Initial exploratory data analysis was conducted to examine:
 * Grouped box plots to visualize summary statistics and potential outliers 
 ### Prior to Modeling
 Before modeling, Generalized Variance Inflation Factor (GVIF) values were calculated in R to determine if multicollinearity existed. The Density variable tended to have strong multicollinearity issues and is removed from the models. If doing so didn't fix the issues, then they were otherwise resolved in a different manner prior to modeling occurring. 
-# Analysis
+# Methodology and Analysis
 Analysis includes: 
 * Initial investigation for identifying statistical differences between wine types with physiochemical properties of interest
 * Testing of assumptions for statistical tests, multiple linear regression models, multicollinearity, and more
@@ -95,7 +96,7 @@ Such models created can likely provide a relatively good estimation of pH or qua
 
 * log(pH) = 1.3547 - 0.0578(Wine Type) + 0.0009(Alcohol) - 0.0208(Fixed Acidity) + 0.0409(Sulphates) - 0.0013(Residual Sugar) - 0.0239(Citric Acid) + 2.196e-05(Total Sulfur Dioxide) - 0.2259(Chlorides)
 
-* log(Quality)=1.2455−0.0388(Wine Type)+0.0548(Alcohol−0.2985(Volatile Acidity)+0.095(Sulphates)+0.004(Residual Sugar)+0.001(Free Sulfur Dioxide)−0.0003(Total Sulfur Dioxide)−0.2145(Chlorides)
+* log(Quality)=1.2455 − 0.0388(Wine Type) + 0.0548(Alcohol) − 0.2985(Volatile Acidity) + 0.095(Sulphates) + 0.004(Residual Sugar) + 0.001(Free Sulfur Dioxide) − 0.0003(Total Sulfur Dioxide) − 0.2145(Chlorides)
 
 The tables below show the model performance results on the test datasets. The pH model had a better adjusted R^2 value than the quality model, which means it was able to explain the data slightly better. 
 
