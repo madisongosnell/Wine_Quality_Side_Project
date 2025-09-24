@@ -55,6 +55,7 @@ Figure 1: Heatmap of Variable Correlation Matrix
 
 
 As seen in the MAE model comparison, for both the pH and quality models, the ridge regression model had the smallest mean absolute error. The ridge regression models' aligned more with the actual dataset than the others presented. The reasoning behind such result could likely be due to the multicollinearity seen in the data. Although, the multiple linear regression models that removed conflicting variables causing multicollinearity concerns were a close second behind the ridge regression models in MAE performance.
+
 Table 1: pH MAE Comparisons
 | Model | MAE |
 |---|---|
